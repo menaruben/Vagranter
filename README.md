@@ -23,7 +23,7 @@ You should get the following output:
 ```
 
 You can enter 'y' to take a look at the Vagrantfile that has been created:
-```vagrant
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.box= "centos/7"
   config.vm.network "forwarded_port", guest: 8080, host: 8081
