@@ -2,8 +2,7 @@
 Make your Vagrantfile simpler by using a toml file instead of ruby!
 
 # Usage
-Create a `vconfig.toml` file and type in your configuration (these are all the currently supported configurations). 
-If your desired config is already met by the default please do not add the "line"/configuration. Keep it simple:
+Create a `vconfig.toml` file and type in your configuration (these are all the currently supported configurations):
 ```toml
 box = "centos/7"
 forwarded_ports = [[8080, 8081], [22, 2221]]        # 0: guest, 1: host
@@ -22,6 +21,19 @@ private_network = "192.168.43.10"
 post_up_message = "VM is now ready to use!"
 synced_folder = [["./", "/var/www"]]        # multiple synced folders can be defined; 0: host, 1: guest
 usable_port_range = [2200, 2250]            # default
+```
+
+If a desired configuration is already met by default please do not add the "line"/configuration. Keep it simple (no redundancy):
+```toml
+box = "centos/7"
+forwarded_ports = [[8080, 8081], [22, 2221]]        # 0: guest, 1: host
+inline_script = ["echo 'Hello World'", "whoami"]
+script = "sample.sh"
+hostname = "vagranter"
+public_network = "192.168.42.10"
+private_network = "192.168.43.10"
+post_up_message = "VM is now ready to use!"
+synced_folder = [["./", "/var/www"]]        # multiple synced folders can be defined; 0: host, 1: guest
 ```
 
 Now you can run the following command in your terminal to build your Vagrantfile:
