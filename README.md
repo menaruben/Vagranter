@@ -2,7 +2,8 @@
 Make your Vagrantfile simpler by using a toml file instead of ruby!
 
 # Usage
-Create a `vconfig.toml` file and type in your configuration (these are all the current features supported):
+Create a `vconfig.toml` file and type in your configuration (these are all the currently supported configurations). 
+If your desired config is already met by the default please do not add the "line"/configuration. Keep it simple:
 ```toml
 box = "centos/7"
 forwarded_ports = [[8080, 8081], [22, 2221]]        # 0: guest, 1: host
@@ -56,7 +57,7 @@ end
 
 You can now run the virtual machine using `vagrant up`!
 
-# future featues
+# Featues
 I am currently trying to add as much as possible from the [config.vm](https://developer.hashicorp.com/vagrant/docs/vagrantfile/machine_settings) so that we can also start using toml
 for bigger / more complicated Vagrantfile configurations.
 
