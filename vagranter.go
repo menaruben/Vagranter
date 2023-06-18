@@ -17,6 +17,7 @@ type Vagrantfile struct {
 	ForwardedPorts         [][]int    `toml:"forwarded_ports"`          // default: -
 	InlineScript           []string   `toml:"inline_script"`            // default: -
 	ShellScriptPath        string     `toml:"script"`                   // default: -
+	AnsiblePlaybook        string     `toml:"ansible_playbook"`         // default: -
 	BoxCheckUpdate         bool       `toml:"box_check_update"`         // default: true
 	AllowFstabModification bool       `toml:"allow_fstab_modification"` // default: true
 	AllowHostsModification bool       `toml:"allow_hosts_modification"` // default: true
@@ -30,7 +31,6 @@ type Vagrantfile struct {
 	PostUpMessage          string     `toml:"post_up_message"`          // default: -
 	SyncedFolders          [][]string `toml:"synced_folder"`            // default: -
 	UsablePortRange        [2]int     `toml:"usable_port_range"`        // default: 2200..2250
-	AnsiblePlaybook        string     `toml:"ansible_playbook"`         // default: -
 
 	VagrantFileLines []string
 	Content          string
