@@ -7,6 +7,9 @@ Vagrant.configure("2") do |config|
 		whoami
 	SHELL
 	config.vm.provision "shell", path: "sample.sh"
+	config.vm.provision "ansible" do |ansible|
+		ansible.playbook = "playbook.yml"
+	end
 	config.vm.hostname = "vagranter"
 	config.vm.network "public_network", ip: "192.168.42.10"
 	config.vm.network "private_network", ip: "192.168.43.10"

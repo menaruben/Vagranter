@@ -21,6 +21,7 @@ private_network = "192.168.43.10"
 post_up_message = "VM is now ready to use!"
 synced_folder = [["./", "/var/www"]]        # multiple synced folders can be defined; 0: host, 1: guest
 usable_port_range = [2200, 2250]            # default
+ansible_playbook = "playbook.yml"
 ```
 
 If a desired configuration is already met by default please do not add the "line"/configuration. Keep it simple (no redundancy):
@@ -34,6 +35,7 @@ public_network = "192.168.42.10"
 private_network = "192.168.43.10"
 post_up_message = "VM is now ready to use!"
 synced_folder = [["./", "/var/www"]]        # multiple synced folders can be defined; 0: host, 1: guest
+ansible_playbook = "playbook.yml"
 ```
 
 Now you can run the following command in your terminal to build your Vagrantfile:
@@ -59,6 +61,9 @@ Vagrant.configure("2") do |config|
                 whoami
         SHELL
         config.vm.provision "shell", path: "sample.sh"
+        config.vm.provision "ansible" do |ansible|
+                ansible.playbook = "playbook.yml"
+        end
         config.vm.hostname = "vagranter"
         config.vm.network "public_network", ip: "192.168.42.10"
         config.vm.network "private_network", ip: "192.168.43.10"
@@ -71,7 +76,7 @@ You can now run the virtual machine using `vagrant up`!
 
 # Featues
 I am currently trying to add as much as possible from the [config.vm](https://developer.hashicorp.com/vagrant/docs/vagrantfile/machine_settings) so that we can also start using toml
-for bigger / more complicated Vagrantfile configurations.
+for bigger / more complicated Vagrantfile configurations. I am also working on the different [providers](https://developer.hashicorp.com/vagrant/docs/provider) so that we can give a detailed description of the "hardware" for our virtual machines.
 
 Here are the currently supported configurations (need to contain the "toml:"...""):
 ```go
@@ -93,6 +98,7 @@ type Vagrantfile struct {
 	PostUpMessage          string     `toml:"post_up_message"`          // default: -
 	SyncedFolders          [][]string `toml:"synced_folder"`            // default: -
 	UsablePortRange        [2]int     `toml:"usable_port_range"`        // default: 2200..2250
+	AnsiblePlaybook        string     `toml:"ansible_playbook"`         // default: -
 
 	VagrantFileLines []string
 	Content          string

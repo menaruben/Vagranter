@@ -15,3 +15,4 @@ private_network = "192.168.43.10"
 post_up_message = "VM is now ready to use!"
 synced_folder = [["./", "/var/www"]]        # multiple synced folders can be defined; 0: host, 1: guest
 usable_port_range = [2200, 2250]            # default
+ansible_playbook = "playbook.yml"

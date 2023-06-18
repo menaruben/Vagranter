@@ -30,6 +30,7 @@ type Vagrantfile struct {
 	PostUpMessage          string     `toml:"post_up_message"`          // default: -
 	SyncedFolders          [][]string `toml:"synced_folder"`            // default: -
 	UsablePortRange        [2]int     `toml:"usable_port_range"`        // default: 2200..2250
+	AnsiblePlaybook        string     `toml:"ansible_playbook"`         // default: -
 
 	VagrantFileLines []string
 	Content          string
@@ -87,6 +88,13 @@ func (v *Vagrantfile) addInlineScript() {
 func (v *Vagrantfile) addShellScript() {
 	if v.ShellScriptPath != "" {
 		v.VagrantFileLines = append(v.VagrantFileLines, fmt.Sprintf("\tconfig.vm.provision \"shell\", path: \"%s\"", v.ShellScriptPath))
+	}
+}
+
+func (v *Vagrantfile) addAnsiblePlaybook() {
+	if v.AnsiblePlaybook != "" {
+		v.VagrantFileLines = append(v.VagrantFileLines, "\tconfig.vm.provision \"ansible\" do |ansible|")
+		v.VagrantFileLines = append(v.VagrantFileLines, fmt.Sprintf("\t\tansible.playbook = \"%s\"\n\tend", v.AnsiblePlaybook))
 	}
 }
 
@@ -175,6 +183,7 @@ func (v *Vagrantfile) build() {
 	v.addPortForwarding()
 	v.addInlineScript()
 	v.addShellScript()
+	v.addAnsiblePlaybook()
 	v.addCheckUpdate()
 	v.addAllowFstabModification()
 	v.addAllowHostsModification()
