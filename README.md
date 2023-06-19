@@ -76,7 +76,7 @@ You can now run the virtual machine using `vagrant up`!
 
 # Featues
 I am currently trying to add as much as possible from the [config.vm](https://developer.hashicorp.com/vagrant/docs/vagrantfile/machine_settings) so that we can also start using toml
-for bigger / more complicated Vagrantfile configurations. I am also working on the different [providers](https://developer.hashicorp.com/vagrant/docs/provider) so that we can give a detailed description of the "hardware" for our virtual machines.
+for bigger / more complicated Vagrantfile configurations. I am also working on the different [providers](https://developer.hashicorp.com/vagrant/docs/providers) so that we can give a detailed description of the "hardware" for our virtual machines.
 
 Here are the currently supported configurations (need to contain the "toml:"...""):
 ```go
